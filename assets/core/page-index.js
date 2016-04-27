@@ -1,0 +1,1 @@
+viewModel.ind = {}; var ind = viewModel.ind;

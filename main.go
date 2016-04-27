@@ -1,9 +1,9 @@
 package main
 
 import (
-	"BelajarGo/myProject/controller"
 	"github.com/eaciit/colony-core/v0"
 	"github.com/eaciit/knot/knot.v1"
+	"github.com/myProject/controller"
 	"net/http"
 	"os"
 	"path"

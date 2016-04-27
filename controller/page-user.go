@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"BelajarGo/myProject/model/dataModel"
+	"github.com/myProject/model/dataModel"
 	//"encoding/json"
 	"fmt"
 	"github.com/eaciit/dbox"

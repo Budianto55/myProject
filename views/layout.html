@@ -1,1 +1,15 @@
-{{template "_head.html"}}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script>var viewModel = {};</script>
+	{{template "_head.html"}}
+</head>
+<body>
+	{{.Content}}
+
+	<script type="text/javascript">
+	    ko.applyBindings(viewModel);
+	</script>
+</body>
+</html>
