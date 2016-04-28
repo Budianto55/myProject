@@ -11,9 +11,9 @@ import (
 )
 
 type User struct {
-	Nama   string `json:"nama"`
-	Alamat string `json:"alamat"`
-	Kota   string `json:"kota"`
+	Nama string `json:"nama"`
+	ID   string `json:"id"`
+	Kota string `json:"kota"`
 }
 
 // func (a *User) TableName() string {

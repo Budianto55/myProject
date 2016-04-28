@@ -10,8 +10,28 @@
     "nama": "faisal"
   },
   {
-    "ID": "tanjung",
-    "Kota": "sby",
-    "Nama": "budianto"
+    "id": "tanjung",
+    "kota": "sby",
+    "nama": "budianto"
+  },
+  {
+    "id": "budi",
+    "kota": "sby",
+    "nama": "ali"
+  },
+  {
+    "id": "lala",
+    "kota": "sby",
+    "nama": "caca"
+  },
+  {
+    "id": "dada",
+    "kota": "sby",
+    "nama": "sasa"
+  },
+  {
+    "id": "www",
+    "kota": "sby",
+    "nama": "ccc"
   }
 ]

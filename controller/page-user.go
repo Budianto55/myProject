@@ -46,7 +46,7 @@ func connection() (dbox.IConnection, error) {
 
 func (u *UserController) GetAll(r *knot.WebContext) interface{} {
 	r.Config.OutputType = knot.OutputJson
-	conn, e := connection()
+	conn, e := new(modelcore.User).Connection()
 	if e != nil {
 		return e
 	}
@@ -71,7 +71,7 @@ func (u *UserController) GetAll(r *knot.WebContext) interface{} {
 
 func (u *UserController) GetSave(r *knot.WebContext) interface{} {
 	r.Config.OutputType = knot.OutputJson
-	c, e := connection()
+	c, e := new(modelcore.User).Connection()
 	if e != nil {
 		fmt.Println(e.Error())
 		return e
@@ -79,22 +79,23 @@ func (u *UserController) GetSave(r *knot.WebContext) interface{} {
 
 	defer c.Close()
 	query := c.NewQuery().Save()
-	data := user{}
+	data := modelcore.User{}
 
-	payload := map[string]string{}
-	err := r.GetForms(&payload)
+	payload := toolkit.M{}
+	err := r.GetPayload(&payload)
 	if err != nil {
 		fmt.Println(err.Error())
 		return err
 	}
 
-	fmt.Println("----------- payload", payload)
-	data.Nama = payload["nama"]
-	data.ID = payload["id"]
-	data.Kota = payload["kota"]
+	//fmt.Println("-------- payload ", payload.data)
+	//fmt.Println("-------- payload ", payload["data"])
+
+	data.ID = payload["id"].(string)
+	data.Nama = payload["nama"].(string)
+	data.Kota = payload["kota"].(string)
 
 	fmt.Println("----------- nama ", data.Nama)
-
 	e = query.Exec(toolkit.M{
 		"data": data,
 	})
