@@ -16,12 +16,6 @@ type UserController struct {
 	App
 }
 
-type user struct {
-	Nama string `json : "nama"`
-	ID   string `json: "id"`
-	Kota string `json: "kota"`
-}
-
 func CreateUserController(u *knot.Server) *UserController {
 	var controller = new(UserController)
 	controller.Server = u
@@ -115,7 +109,55 @@ func (u *UserController) GetSave(r *knot.WebContext) interface{} {
 
 func (u *UserController) TestCoba(r *knot.WebContext) interface{} {
 	data := new(modelcore.User).TestCoba()
-	coba, _ := new(modelcore.User).Connection()
-	fmt.Println("------------ koneksi", coba)
+	//coba, _ := new(modelcore.User).Connection()
 	return data
+}
+
+func (u *UserController) DeleteAll(r *knot.WebContext) interface{} {
+	r.Config.OutputType = knot.OutputJson
+	c, e := new(modelcore.User).Connection()
+	if e != nil {
+		return e
+	}
+	defer c.Close()
+
+	e = c.NewQuery().Delete().Exec(nil)
+	if e != nil {
+		return e
+	}
+
+	a := map[string]string{"data": "berhasil dihapus"}
+
+	return a
+}
+
+func (u *UserController) GetAllMember(r *knot.WebContext) interface{} {
+	r.Config.OutputType = knot.OutputJson
+
+	c, e := new(modelcore.Member).MemberConnect()
+	if e != nil {
+		return e
+	}
+
+	defer c.Close()
+	q, err := c.NewQuery().From("users").Cursor(nil)
+	if err != nil {
+		return err
+	}
+	if q == nil {
+		return q
+	}
+
+	defer q.Close()
+
+	results := make([]map[string]interface{}, 0)
+	fmt.Println("-------- hasilnya", results)
+	en := q.Fetch(&results, 10, false)
+
+	if en != nil {
+		m := map[string]string{"message": "gagal"}
+		return m
+	}
+	w := map[string]interface{}{"message": "berhasil", "data": results}
+	return w
 }

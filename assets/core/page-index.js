@@ -1,11 +1,15 @@
 viewModel.ind = {}; var ind = viewModel.ind;
 
-$(function(){
+ind.Save = function(){
 	$.ajax({
 	  url: "/user/getsave",
 	  method: "POST",
-	  data: JSON.stringify({"id": "www", "nama":"ccc", "kota":"sby"}),
+	  data: JSON.stringify({"id": "bbb", "nama":"sinta", "kota":"sby"}),
 	  dataType: "json",
 	  contentType: "json"
-	})
+	});
+}
+
+$(function(){
+	ind.Save();
 });
